@@ -1,5 +1,5 @@
 import pygame
-import random as rd
+from random import randrange
 
 branco=(255,255,255)
 preto=(0,0,0)
@@ -38,10 +38,10 @@ def maca(pos_x, pos_y):
 def jogo():
     sair = True
     fimdejogo = False
-    pos_x=rd.randrange(0,largura-tamanho,10)
-    pos_y=rd.randrange(0,altura-tamanho-placar,10)
-    maca_x=rd.randrange(0,largura-tamanho,10)
-    maca_y=rd.randrange(0,altura-tamanho-placar,10)
+    pos_x=randrange(0,largura-tamanho,10)
+    pos_y=randrange(0,altura-tamanho-placar,10)
+    maca_x=randrange(0,largura-tamanho,10)
+    maca_y=randrange(0,altura-tamanho-placar,10)
     velocidade_x=0
     velocidade_y=0
     CobraXY = []
@@ -58,10 +58,10 @@ def jogo():
                 if event.key == pygame.K_LEFT_C:
                   sair = True
                   fimdejogo = False
-                  pos_x=rd.randrange(0,largura-tamanho,10)
-                  pos_y=rd.randrange(0,altura-tamanho-placar,10)
-                  maca_x=rd.randrange(0,largura-tamanho,10)
-                  maca_y=rd.randrange(0,altura-tamanho-placar,10)
+                  pos_x=randrange(0,largura-tamanho,10)
+                  pos_y=randrange(0,altura-tamanho-placar,10)
+                  maca_x=randrange(0,largura-tamanho,10)
+                  maca_y=randrange(0,altura-tamanho-placar,10)
                   velocidade_x=0
                   velocidade_y=0
                   CobraXY = []
@@ -93,10 +93,10 @@ def jogo():
               if x > 45 and y > 120 and x < 180 and y < 147:
                         sair = True
                         fimdejogo = False
-                        pos_x = rd.randrange(0, largura - tamanho, 10)
-                        pos_y = rd.randrange(0, altura - tamanho - placar, 10)
-                        maca_x = rd.randrange(0, largura - tamanho, 10)
-                        maca_y = rd.randrange(0, altura - tamanho - placar, 10)
+                        pos_x = randrange(0, largura - tamanho, 10)
+                        pos_y = randrange(0, altura - tamanho - placar, 10)
+                        maca_x = randrange(0, largura - tamanho, 10)
+                        maca_y = randrange(0, altura - tamanho - placar, 10)
                         velocidade_x = 0
                         velocidade_y = 0
                         CobraXY = []
@@ -144,6 +144,15 @@ def jogo():
         texto("Pontuação: ")
           cobra(CobraXY)
           if pos_x == maca_y and pos_y == maca_y:
-            maca_x=rd.randrange(0,largura-tamanho,10)
-            maca_y=rd.randrange(0,altura-tamanho-placar,10)
+            maca_x=randrange(0,largura-tamanho,10)
+            maca_y=randrange(0,altura-tamanho-placar,10)
             pontos += 1
+
+
+          maca(maca_x,maca_y)
+          pygame.display.update()
+          relogio.tick(15)
+          
+      
+jogo()
+pygame.quit()
