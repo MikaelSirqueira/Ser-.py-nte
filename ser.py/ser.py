@@ -1,9 +1,7 @@
 #Importação das bibliotecas
 from typing import final
 import pygame
-from random import randrange
-from random import randint
-import time
+from random import randrange 
 
 branco=(255,255,255)
 preto=(0,0,0)
@@ -29,7 +27,7 @@ font = pygame.font.SysFont(None, 15)
 corcobra = amarelo
 corfundo = azul
 telafinal = False
-escolha = [[True,False],[False, True],[],[],[],[],[],[],[]]
+escolha = [[True,False],[True, False],[True, False],[True,False],[True,False],[True,False],[True,False],[True,False],[True,False]]
 
 #função de texto
 def texto(msg, cor,tam, x, y):
@@ -38,7 +36,6 @@ def texto(msg, cor,tam, x, y):
     fundo.blit(texto1, [x,y])
 def perguntas(n):
     if n == 1:
-        corcobra = amarelo
         fundo.fill(corfundo)
         texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
         pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
@@ -46,15 +43,71 @@ def perguntas(n):
         pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
         texto("Compilada", branco, 30, 195 ,125)
         pygame.display.update()
-    # if n == 2:
+    if n == 2:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
     if n == 3:
-        corcobra = amarelo
-    # if n == 4:
-    # if n == 5:
-    # if n == 6:
-    # if n == 7:
-    # if n == 8:
-    # if n == 9:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 4:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 5:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 6:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 7:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 8:
+        
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
+    if n == 9:
+        fundo.fill(corfundo)
+        texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
+        pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+        texto("Interpretada", branco, 30, 50 ,125)
+        pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
+        texto("Compilada", branco, 30, 195 ,125)
+        pygame.display.update()
 
 
 #função da cobra
@@ -89,9 +142,12 @@ def jogo():
                 if event.type == pygame.QUIT:
                     sair = False
                     fimdejogo = False
-                if event.type == pygame.KEYDOWN:
-                    if telamorte == True:
-                        if event.key == pygame.K_1:
+                #Mouse
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    x = pygame.mouse.get_pos()[0]
+                    y = pygame.mouse.get_pos()[1]
+                    if telamorte:
+                        if x > 45 and y > 120 and x < 180 and y < 147:
                             sair = True
                             fimdejogo = False
                             pos_x=randrange(0,largura-tamanho,10)
@@ -104,52 +160,27 @@ def jogo():
                             CobraComp = 1
                             pontos = 0
                             pergunta = 0
-                        if event.key == pygame.K_2:
+                        elif x > 190 and y > 120 and x < 265 and y < 147:
                             sair = False
                             fimdejogo = False
-                    if telamorte == False and pontos == 27:
-                        tic = time.perf_counter()
-                        if tic > 10:
+                    if not telamorte:
+                        if x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][0]:
+                            sair = True
+                            fimdejogo = False
+                        elif x > 190 and y > 120 and x < 265 and y < 147 and not escolha[pergunta - 1][0]:
                             sair = False
-                    if telamorte == False:
-                        if event.key == pygame.K_1 and escolha[pergunta-1][1]:
+                            fimdejogo = False
+                        elif x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][1]:
+                            sair = False
+                            fimdejogo = False
+                        elif x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][1]:
                             sair = True
                             fimdejogo = False
-                        if event.key == pygame.K_2 and escolha[pergunta-1][1]:
-                            sair = True
-                            fimdejogo = False
-                        if event.key == pygame.K_1 and not escolha[pergunta-1][2]:
-                            sair = True
-                            fimdejogo = False
-                        if event.key == pygame.K_2 and not escolha[pergunta-1][2]:
-                            sair = True
-                            fimdejogo = False
-                #Mouse
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    x = pygame.mouse.get_pos()[0]
-                    y = pygame.mouse.get_pos()[1]
-                    if x > 45 and y > 120 and x < 180 and y < 147:
-                        sair = True
-                        fimdejogo = False
-                        pos_x=randrange(0,largura-tamanho,10)
-                        pos_y=randrange(0,altura-tamanho - placar,10)
-                        maca_x=randrange(0,largura-tamanho,10)
-                        maca_y=randrange(0,altura-tamanho - placar,10)
-                        velocidade_x=0
-                        velocidade_y=0
-                        CobraXY = []
-                        CobraComp = 1
-                        pontos = 0
-                        pergunta = 0
-                    elif x > 190 and y > 120 and x < 265 and y < 147:
-                        sair = False
-                        fimdejogo = False
             if telafinal:
                 fundo.fill(corfundo)
                 texto("Parabéns", vermelho, 50, 65, 30)
                 texto("Você é um excelênte", preto, 30, 40, 80)
                 texto("programador",preto, 30,40,100)
-                texto((10 - tic) +str("s"),preto, 30,40,100)
                 pygame.display.update()
             if finale:
                 if telamorte:
@@ -157,9 +188,9 @@ def jogo():
                     texto("Fim de jogo", vermelho, 50, 65, 30)
                     texto("Pontuação Final: " +str(pontos), preto, 30, 70, 80)
                     pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
-                    texto("Continuar(1)", branco, 30, 50 ,125)
+                    texto("Continuar", branco, 30, 50 ,125)
                     pygame.draw.rect(fundo, preto, [190, 120, 75, 27])
-                    texto("Sair(2))", branco, 30, 195 ,125)
+                    texto("Sair", branco, 30, 195 ,125)
                     pygame.display.update()
                 if not telamorte and finale:
                     perguntas(pergunta)
@@ -193,7 +224,7 @@ def jogo():
                 maca_y=randrange(0,altura-tamanho - 40,10)
                 CobraComp += 1
                 pontos += 1
-                if pontos ==  4:
+                if pontos ==  27:
                     fimdejogo = True
                     sair = True
                     telamorte = False
