@@ -1,4 +1,5 @@
 #Importação das bibliotecas
+from typing import final
 import pygame
 from random import randrange
 from random import randint
@@ -7,8 +8,8 @@ branco=(255,255,255)
 preto=(0,0,0)
 vermelho=(255,0,0)
 verde=(0,255,0)
-azul=(0,0,255)
-amarelo = (255,255,0)
+azul=(1, 22, 84)
+amarelo = (251, 204, 71)
 
 try:
     pygame.init()
@@ -24,9 +25,9 @@ relogio = pygame.time.Clock()
 fundo = pygame.display.set_mode((largura,altura))
 pygame.display.set_caption("Ser.pynte")
 font = pygame.font.SysFont(None, 15)
-corcobra = preto
-corfundo = branco
-
+corcobra = amarelo
+corfundo = azul
+telafinal = False
 
 
 #função de texto
@@ -36,16 +37,14 @@ def texto(msg, cor,tam, x, y):
     fundo.blit(texto1, [x,y])
 def perguntas(n):
     if n == 1:
-        print("oi")
+        corcobra = amarelo
+        fundo.fill(corfundo)
         texto("1- Python é uma linguagem: ", vermelho, 25, 55, 30)
         pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
         texto("Interpretada", branco, 30, 50 ,125)
         pygame.draw.rect(fundo, preto, [190, 120, 120, 27])
         texto("Compilada", branco, 30, 195 ,125)
-        # for event in pygame.event.get():
-        #     if event.type == pygame.KEYDOWN:
-        #          if event.key == pygame.K_1:
-        #             break
+        pygame.display.update()
     # if n == 2:
     if n == 3:
         corcobra = amarelo
@@ -78,9 +77,11 @@ def jogo():
     CobraXY = []
     CobraComp = 1
     pontos = 0
-    pergunta = 1
+    pergunta = 0
     despausar = True
-    telamorte = True
+    telamorte = False
+    telafinal = False
+    finale = True
     while sair:
         while fimdejogo:
             for event in pygame.event.get():
@@ -88,26 +89,27 @@ def jogo():
                     sair = False
                     fimdejogo = False
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_c:
-                        sair = True
-                        fimdejogo = False
-                        pos_x=randrange(0,largura-tamanho,10)
-                        pos_y=randrange(0,altura-tamanho - placar,10)
-                        maca_x=randrange(0,largura-tamanho,10)
-                        maca_y=randrange(0,altura-tamanho - placar,10)
-                        velocidade_x=0
-                        velocidade_y=0
-                        CobraXY = []
-                        CobraComp = 1
-                        pontos = 0
-                        pergunta = 0
-                    if event.key == pygame.K_s:
-                        sair = False
-                        fimdejogo = False
-                    if pontos == 3:
-                        if event.type == pygame.K_1:
+                    if telamorte == True:
+                        if event.key == pygame.K_1:
+                            sair = True
+                            fimdejogo = False
+                            pos_x=randrange(0,largura-tamanho,10)
+                            pos_y=randrange(0,altura-tamanho - placar,10)
+                            maca_x=randrange(0,largura-tamanho,10)
+                            maca_y=randrange(0,altura-tamanho - placar,10)
+                            velocidade_x=0
+                            velocidade_y=0
+                            CobraXY = []
+                            CobraComp = 1
+                            pontos = 0
+                            pergunta = 0
+                        if event.key == pygame.K_2:
                             sair = False
-
+                            fimdejogo = False
+                    if telamorte == False:
+                        if event.key == pygame.K_1:
+                            sair = True
+                            fimdejogo = False
                 #Mouse
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     x = pygame.mouse.get_pos()[0]
@@ -128,15 +130,24 @@ def jogo():
                     elif x > 190 and y > 120 and x < 265 and y < 147:
                         sair = False
                         fimdejogo = False
-            if telamorte:
+            if telafinal:
                 fundo.fill(corfundo)
-                texto("Fim de jogo", vermelho, 50, 65, 30)
-                texto("Pontuação Final: " +str(pontos), preto, 30, 70, 80)
-                pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
-                texto("Continuar(C)", branco, 30, 50 ,125)
-                pygame.draw.rect(fundo, preto, [190, 120, 75, 27])
-                texto("Sair(S))", branco, 30, 195 ,125)
+                texto("Parabéns", vermelho, 50, 65, 30)
+                texto("Você é um excelênte", preto, 30, 40, 80)
+                texto("programador",preto, 30,40,100)
                 pygame.display.update()
+            if finale:
+                if telamorte:
+                    fundo.fill(corfundo)
+                    texto("Fim de jogo", vermelho, 50, 65, 30)
+                    texto("Pontuação Final: " +str(pontos), preto, 30, 70, 80)
+                    pygame.draw.rect(fundo, preto, [45, 120, 135 ,27])
+                    texto("Continuar(1)", branco, 30, 50 ,125)
+                    pygame.draw.rect(fundo, preto, [190, 120, 75, 27])
+                    texto("Sair(2))", branco, 30, 195 ,125)
+                    pygame.display.update()
+                if not telamorte and finale:
+                    perguntas(pergunta)
         #movimentação cobra
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -167,17 +178,17 @@ def jogo():
                 maca_y=randrange(0,altura-tamanho - 40,10)
                 CobraComp += 1
                 pontos += 1
-                if pontos == 3:
+                if pontos ==  27:
                     fimdejogo = True
                     sair = True
                     telamorte = False
-                # if pontos % 3 == 0:
-                    # pergunta += 1
-                    # despausar = False
-                    # perguntas(pergunta)
-                    # pygame.display.update()
-                # else:
-                    # despausar = True
+                    telafinal = True
+                    finale = False
+                if pontos % 3 == 0:
+                    pergunta += 1
+                    telamorte = False
+                    fimdejogo = True
+
                 
             if despausar:
                 #Regras de parede 
