@@ -3,6 +3,7 @@ from typing import final
 import pygame
 from random import randrange
 from random import randint
+import time
 
 branco=(255,255,255)
 preto=(0,0,0)
@@ -28,7 +29,7 @@ font = pygame.font.SysFont(None, 15)
 corcobra = amarelo
 corfundo = azul
 telafinal = False
-
+escolha = [[True,False],[False, True],[],[],[],[],[],[],[]]
 
 #função de texto
 def texto(msg, cor,tam, x, y):
@@ -106,8 +107,21 @@ def jogo():
                         if event.key == pygame.K_2:
                             sair = False
                             fimdejogo = False
+                    if telamorte == False and pontos == 27:
+                        tic = time.perf_counter()
+                        if tic > 10:
+                            sair = False
                     if telamorte == False:
-                        if event.key == pygame.K_1:
+                        if event.key == pygame.K_1 and escolha[pergunta-1][1]:
+                            sair = True
+                            fimdejogo = False
+                        if event.key == pygame.K_2 and escolha[pergunta-1][1]:
+                            sair = True
+                            fimdejogo = False
+                        if event.key == pygame.K_1 and not escolha[pergunta-1][2]:
+                            sair = True
+                            fimdejogo = False
+                        if event.key == pygame.K_2 and not escolha[pergunta-1][2]:
                             sair = True
                             fimdejogo = False
                 #Mouse
@@ -135,6 +149,7 @@ def jogo():
                 texto("Parabéns", vermelho, 50, 65, 30)
                 texto("Você é um excelênte", preto, 30, 40, 80)
                 texto("programador",preto, 30,40,100)
+                texto((10 - tic) +str("s"),preto, 30,40,100)
                 pygame.display.update()
             if finale:
                 if telamorte:
@@ -178,7 +193,7 @@ def jogo():
                 maca_y=randrange(0,altura-tamanho - 40,10)
                 CobraComp += 1
                 pontos += 1
-                if pontos ==  27:
+                if pontos ==  4:
                     fimdejogo = True
                     sair = True
                     telamorte = False
