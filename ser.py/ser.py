@@ -164,17 +164,11 @@ def jogo():
                             sair = False
                             fimdejogo = False
                     if not telamorte:
-                        if x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][0]:
+                        if x > 45 and y > 120 and x < 180 and y < 147 and escolha[0][0]:
                             sair = True
                             fimdejogo = False
-                        elif x > 190 and y > 120 and x < 265 and y < 147 and not escolha[pergunta - 1][0]:
+                        elif x > 190 and y > 120 and x < 265 and y < 147 and not escolha[0][1]:
                             sair = False
-                            fimdejogo = False
-                        elif x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][1]:
-                            sair = False
-                            fimdejogo = False
-                        elif x > 45 and y > 120 and x < 180 and y < 147 and escolha[pergunta - 1][1]:
-                            sair = True
                             fimdejogo = False
             if telafinal:
                 fundo.fill(corfundo)
