@@ -29,7 +29,7 @@ corfundo = azul
 telafinal = False
 #area de atribuição das respostas certas e erradas (em ordem 1,2,3,4,5,6,7,8,9)
 escolha = [[True, False], [False, False, True, False], [False, False, False, True], [True, False, False, False],
-           [False, False, True, False], [False, False, True], [False, True, False], [False, False, True],
+           [False, False, True, False], [False, False, True], [False, True, False], [False, True, False],
            [False, False, False, True]]
 
 # função de texto
@@ -301,11 +301,11 @@ def jogo():
                             if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[7][0]: #8-a
                                 sair = False
                                 fimdejogo = False
-                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[7][1]: #8-b
-                                sair = False
-                                fimdejogo = False
-                            elif x > 20 and x < 270 and y > 160  and y < 187 and escolha[7][2]: #8-c
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and escolha[7][1]: #8-b
                                 sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and not escolha[7][2]: #8-c
+                                sair = False
                                 fimdejogo = False
 
                         if pergunta == 9:
@@ -369,7 +369,7 @@ def jogo():
                 maca_y = randrange(0, altura - tamanho - 40, 10)
                 CobraComp += 1
                 pontos += 1
-                if pontos == 27:
+                if pontos == 30:
                     fimdejogo = True
                     sair = True
                     telamorte = False
