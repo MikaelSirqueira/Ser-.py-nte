@@ -3,7 +3,6 @@ from typing import final
 import pygame
 from random import randrange
 
-#declaração das cores em rgb
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 vermelho = (255, 0, 0)
@@ -11,19 +10,16 @@ verde = (0, 255, 0)
 azul = (1, 22, 84)
 amarelo = (251, 204, 71)
 
-#inicialização do pygame
 try:
     pygame.init()
 except:
     print("O modulo pygame não foi inicializado com sucesso")
 
-#declaração de largura, altura, tamanho da cobra e 
 largura = 340
 altura = 280
 tamanho = 10
 placar = 40
-
-# fps, tamanho da tela,  nome do jogo, fonte de texto, cor da cobra e de fundo, e respostas certas 
+# fps, tamanho da tela,  nome do jogo, e fonte de texto
 relogio = pygame.time.Clock()
 fundo = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Ser.pynte")
@@ -31,17 +27,18 @@ font = pygame.font.SysFont(None, 15)
 corcobra = amarelo
 corfundo = azul
 telafinal = False
-escolha = [[True, False], [False, False, True, False], [True, False, False, False], [True, False, False, False],
-           [False, False, True, False], [False, False, True, False], [False, True, False, False], [False, False, True],
+#area de atribuição das respostas certas e erradas (em ordem 1,2,3,4,5,6,7,8,9)
+escolha = [[True, False], [False, False, True, False], [False, False, False, True], [True, False, False, False],
+           [False, False, True, False], [False, False, True], [False, True, False], [False, False, True],
            [False, False, False, True]]
 
 # função de texto
-def texto(mensagem, cor, tamanho_texto, x, y):
-    font = pygame.font.SysFont(None, tamanho_texto)
-    texto1 = font.render(mensagem, True, cor)
+def texto(msg, cor, tam, x, y):
+    font = pygame.font.SysFont(None, tam)
+    texto1 = font.render(msg, True, cor)
     fundo.blit(texto1, [x, y])
 
-#função das perguntass
+
 def perguntas(n):
     if n == 1:
         fundo.fill(corfundo)
@@ -68,13 +65,13 @@ def perguntas(n):
         texto("3- Qual o comando para criar uma ", vermelho, 25, 5, 20)
         texto("função no python: ", vermelho, 25, 10, 45)
         pygame.draw.rect(fundo, preto, [20, 80, 270, 27])
-        texto("a)def", branco, 22, 25, 85)
+        texto("a)function", branco, 22, 25, 85)
         pygame.draw.rect(fundo, preto, [20, 120, 270, 27])
         texto("b)void", branco, 22, 25, 125)
         pygame.draw.rect(fundo, preto, [20, 160, 270, 27])
         texto("c)echo", branco, 22, 25, 165)
         pygame.draw.rect(fundo, preto, [20, 200, 270, 27])
-        texto("d)function", branco, 22, 25, 205)
+        texto("d)def", branco, 22, 25, 205)
         pygame.display.update()
     if n == 4:
         fundo.fill(corfundo)
@@ -91,25 +88,25 @@ def perguntas(n):
         pygame.display.update()
     if n == 5:
         fundo.fill(corfundo)
-        texto("5- Qual operador logico para verificar", vermelho, 25, 5, 20)
+        texto("5- Qual operador lógico para verificar", vermelho, 25, 5, 20)
         texto("se dois valores são diferentes:", vermelho, 25, 10, 45)
         pygame.draw.rect(fundo, preto, [20, 80, 270, 27])
-        texto("a)>=", branco, 22, 25, 85)
+        texto("a) >=", branco, 22, 25, 85)
         pygame.draw.rect(fundo, preto, [20, 120, 270, 27])
-        texto("b)==", branco, 22, 25, 125)
+        texto("b) ==", branco, 22, 25, 125)
         pygame.draw.rect(fundo, preto, [20, 160, 270, 27])
-        texto("c)!=", branco, 22, 25, 165)
+        texto("c) !=", branco, 22, 25, 165)
         pygame.draw.rect(fundo, preto, [20, 200, 270, 27])
-        texto("d)≠", branco, 22, 25, 205)
+        texto("d) ≠", branco, 22, 25, 205)
         pygame.display.update()
     if n == 6:
         fundo.fill(corfundo)
         texto("6- Para o que serve a indentação:", vermelho, 25, 5, 30)
-        pygame.draw.rect(fundo, preto, [20, 80, 270, 27])
+        pygame.draw.rect(fundo, preto, [20, 80, 290, 27])
         texto("a)para o código ficar mais bonito", branco, 22, 25, 85)
-        pygame.draw.rect(fundo, preto, [20, 120, 270, 27])
+        pygame.draw.rect(fundo, preto, [20, 120, 290, 27])
         texto("b)para não parecer uma redação", branco, 22, 25, 125)
-        pygame.draw.rect(fundo, preto, [20, 160, 270, 27])
+        pygame.draw.rect(fundo, preto, [20, 160, 290, 52])
         texto("c)para ressaltar ou definir a estrutura", branco, 22, 25, 165)
         texto("do algoritmo", branco, 22, 25, 187)
         pygame.display.update()
@@ -136,7 +133,7 @@ def perguntas(n):
         pygame.draw.rect(fundo, preto, [20, 120, 270, 27])
         texto("b)indentação", branco, 22, 25, 125)
         pygame.draw.rect(fundo, preto, [20, 160, 270, 27])
-        texto("c)\ n", branco, 22, 25, 165)
+        texto("c) \ n", branco, 22, 25, 165)
         pygame.display.update()
     if n == 9:
         fundo.fill(corfundo)
@@ -170,7 +167,6 @@ def maca(pos_x, pos_y):
 
 # função do jogo
 def jogo():
-    #variaveis do jogo
     sair = True
     fimdejogo = False
     pos_x = randrange(0, largura - tamanho, 10)
@@ -180,7 +176,7 @@ def jogo():
     velocidade_x = 0
     velocidade_y = 0
     CobraXY = []
-    CobraComprimento = 1
+    CobraComp = 1
     pontos = 0
     pergunta = 0
     despausar = True
@@ -208,20 +204,21 @@ def jogo():
                             velocidade_x = 0
                             velocidade_y = 0
                             CobraXY = []
-                            CobraComprimento = 1
+                            CobraComp = 1
                             pontos = 0
                             pergunta = 0
                         elif x > 190 and y > 120 and x < 265 and y < 147:
                             sair = False
                             fimdejogo = False
-                    if not telamorte: #questão 1
+                    if not telamorte: #vê se a resposta do jogador está correta, se estiver correta continua o jogo.
                         if pergunta == 1:
-                            if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #1a
+                            if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #1-a
                                 sair = True
                                 fimdejogo = False
-                            elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #1b
+                            elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #1-b
                                 sair = False
                                 fimdejogo = False
+
                         if pergunta == 2:
                             if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[1][0]: #2-a
                                 sair = False
@@ -235,28 +232,102 @@ def jogo():
                             elif x > 20 and x < 270 and y > 200  and y < 227 and not escolha[1][3]: #2-d
                                 sair = False
                                 fimdejogo = False
+
                         if pergunta == 3:
-                            pass
+                            if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[2][0]: #3-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[2][1]: #3-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and not escolha[2][2]: #3-c
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 200  and y < 227 and escolha[2][3]: #3-d
+                                sair = True
+                                fimdejogo = False
+
                         if pergunta == 4:
-                            pass
+                            if x > 20 and x < 270  and y > 80 and y < 107 and escolha[3][0]: #4-a
+                                sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[3][1]: #4-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and not escolha[3][2]: #4-c
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 200  and y < 227 and not escolha[3][3]: #4-d
+                                sair = False
+                                fimdejogo = False
+
                         if pergunta == 5:
-                            pass
+                            if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[4][0]: #5-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[4][1]: #5-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and escolha[4][2]: #5-c
+                                sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 200  and y < 227 and not escolha[4][3]: #5-d
+                                sair = False
+                                fimdejogo = False
+
                         if pergunta == 6:
-                            pass
+                            if x > 20 and x < 290  and y > 80 and y < 107 and not escolha[5][0]: #6-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 290 and y > 120  and y < 147 and not escolha[5][1]: #6-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 290 and y > 160  and y < 212 and escolha[5][2]: #6-c
+                                sair = True
+                                fimdejogo = False
+
                         if pergunta == 7:
-                            pass
+                            if x > 20 and x < 290  and y > 80 and y < 130 and not escolha[6][0]: #7-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 290 and y > 140  and y < 192 and escolha[6][1]: #7-b
+                                sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 290 and y > 200  and y < 252 and not escolha[6][2]: #7-c
+                                sair = False
+                                fimdejogo = False
+
                         if pergunta == 8:
-                            pass
+                            if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[7][0]: #8-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[7][1]: #8-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and escolha[7][2]: #8-c
+                                sair = True
+                                fimdejogo = False
+
                         if pergunta == 9:
-                            pass
-            #telafinal
+                            if x > 20 and x < 270  and y > 90 and y < 117 and not escolha[8][0]: #9-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 130  and y < 157 and not escolha[8][1]: #9-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 170  and y < 197 and not escolha[8][2]: #9-c
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 210  and y < 237 and escolha[8][3]: #9-d
+                                sair = True
+                                fimdejogo = False
+
             if telafinal:
                 fundo.fill(corfundo)
                 texto("Parabéns", vermelho, 50, 65, 30)
                 texto("Você é um excelênte", preto, 30, 40, 80)
                 texto("programador", preto, 30, 40, 100)
                 pygame.display.update()
-            #
             if finale:
                 if telamorte:
                     fundo.fill(corfundo)
@@ -269,7 +340,7 @@ def jogo():
                     pygame.display.update()
                 if not telamorte and finale:
                     perguntas(pergunta)
-        #sair do jogo pelo "X" e movimentação cobra
+        # movimentação cobra
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sair = False
@@ -296,7 +367,7 @@ def jogo():
             if pos_x == maca_x and pos_y == maca_y:
                 maca_x = randrange(0, largura - tamanho, 10)
                 maca_y = randrange(0, altura - tamanho - 40, 10)
-                CobraComprimento += 1
+                CobraComp += 1
                 pontos += 1
                 if pontos == 27:
                     fimdejogo = True
@@ -308,7 +379,7 @@ def jogo():
                     pergunta += 1
                     telamorte = False
                     fimdejogo = True
-            #regras de jogo e aumento da cobra
+
             if despausar:
                 # Regras de parede
                 if pos_x + tamanho > largura:
@@ -324,7 +395,7 @@ def jogo():
                 CobraInicio.append(pos_x)
                 CobraInicio.append(pos_y)
                 CobraXY.append(CobraInicio)
-                if len(CobraXY) > CobraComprimento:
+                if len(CobraXY) > CobraComp:
                     del CobraXY[0]
                 # fim de jogo, colisão da cobra com sí própria
                 if any(Bloco == CobraInicio for Bloco in CobraXY[:-1]):
