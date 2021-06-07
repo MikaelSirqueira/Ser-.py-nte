@@ -210,49 +210,40 @@ def jogo():
                             sair = False
                             fimdejogo = False
                     if not telamorte: #questão 1
-                        if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #a
-                            sair = True
-                            fimdejogo = False
-                        elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #b
-                            sair = False
-                            fimdejogo = False
-
-                    '''if telamorte:#questao 2
-                        if x > 20 and x < 270 and y > 160  and y < 187:
-                            sair = True
-                            fimdejogo = False
-                            pos_x = randrange(0, largura - tamanho, 10)
-                            pos_y = randrange(0, altura - tamanho - placar, 10)
-                            maca_x = randrange(0, largura - tamanho, 10)
-                            maca_y = randrange(0, altura - tamanho - placar, 10)
-                            velocidade_x = 0
-                            velocidade_y = 0
-                            CobraXY = []
-                            CobraComp = 1
-                            pontos = 0
-                            pergunta = 1
-                        elif x > 20 and x < 270  and y > 80 and y < 107: #2-a
-                            sair = False
-                            fimdejogo = False
-                        elif x > 20 and x < 270 and y > 120 and y < 147:#2-b
-                            sair = False
-                            fimdejogo = False
-                        elif x > 20 and x < 270 and y > 200  and y < 227: #2-d
-                            sair = False
-                            fimdejogo = False
-                    if not telamorte: #questão 2
-                        if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[1][0]: #2-a
-                            sair = False
-                            fimdejogo = False
-                        elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[1][1]: #2-b
-                            sair = False
-                            fimdejogo = False
-                        elif x > 20 and x < 270 and y > 160  and y < 187 and escolha[1][2]: #2-c
-                            sair = True
-                            fimdejogo = False
-                        elif x > 20 and x < 270 and y > 200  and y < 227 and not escolha[1][3]: #2-d
-                            sair = False
-                            fimdejogo = False'''
+                        if pergunta == 1:
+                            if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #a
+                                sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #b
+                                sair = False
+                                fimdejogo = False
+                        if pergunta == 2:
+                            if x > 20 and x < 270  and y > 80 and y < 107 and not escolha[1][0]: #2-a
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 120  and y < 147 and not escolha[1][1]: #2-b
+                                sair = False
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 160  and y < 187 and escolha[1][2]: #2-c
+                                sair = True
+                                fimdejogo = False
+                            elif x > 20 and x < 270 and y > 200  and y < 227 and not escolha[1][3]: #2-d
+                                sair = False
+                                fimdejogo = False
+                        if pergunta == 3:
+                            pass
+                        if pergunta == 4:
+                            pass
+                        if pergunta == 5:
+                            pass
+                        if pergunta == 6:
+                            pass
+                        if pergunta == 7:
+                            pass
+                        if pergunta == 8:
+                            pass
+                        if pergunta == 9:
+                            pass
             if telafinal:
                 fundo.fill(corfundo)
                 texto("Parabéns", vermelho, 50, 65, 30)
