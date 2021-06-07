@@ -3,6 +3,7 @@ from typing import final
 import pygame
 from random import randrange
 
+#declaração das cores em rgb
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 vermelho = (255, 0, 0)
@@ -10,16 +11,19 @@ verde = (0, 255, 0)
 azul = (1, 22, 84)
 amarelo = (251, 204, 71)
 
+#inicialização do pygame
 try:
     pygame.init()
 except:
     print("O modulo pygame não foi inicializado com sucesso")
 
+#declaração de largura, altura, tamanho da cobra e 
 largura = 340
 altura = 280
 tamanho = 10
 placar = 40
-# fps, tamanho da tela,  nome do jogo, e fonte de texto
+
+# fps, tamanho da tela,  nome do jogo, fonte de texto, cor da cobra e de fundo, e respostas certas 
 relogio = pygame.time.Clock()
 fundo = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Ser.pynte")
@@ -32,12 +36,12 @@ escolha = [[True, False], [False, False, True, False], [True, False, False, Fals
            [False, False, False, True]]
 
 # função de texto
-def texto(msg, cor, tam, x, y):
-    font = pygame.font.SysFont(None, tam)
-    texto1 = font.render(msg, True, cor)
+def texto(mensagem, cor, tamanho_texto, x, y):
+    font = pygame.font.SysFont(None, tamanho_texto)
+    texto1 = font.render(mensagem, True, cor)
     fundo.blit(texto1, [x, y])
 
-
+#função das perguntass
 def perguntas(n):
     if n == 1:
         fundo.fill(corfundo)
@@ -166,6 +170,7 @@ def maca(pos_x, pos_y):
 
 # função do jogo
 def jogo():
+    #variaveis do jogo
     sair = True
     fimdejogo = False
     pos_x = randrange(0, largura - tamanho, 10)
@@ -175,7 +180,7 @@ def jogo():
     velocidade_x = 0
     velocidade_y = 0
     CobraXY = []
-    CobraComp = 1
+    CobraComprimento = 1
     pontos = 0
     pergunta = 0
     despausar = True
@@ -203,7 +208,7 @@ def jogo():
                             velocidade_x = 0
                             velocidade_y = 0
                             CobraXY = []
-                            CobraComp = 1
+                            CobraComprimento = 1
                             pontos = 0
                             pergunta = 0
                         elif x > 190 and y > 120 and x < 265 and y < 147:
@@ -211,10 +216,10 @@ def jogo():
                             fimdejogo = False
                     if not telamorte: #questão 1
                         if pergunta == 1:
-                            if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #a
+                            if x > 20 and x < 200  and y > 80 and y < 107 and escolha[0][0]: #1a
                                 sair = True
                                 fimdejogo = False
-                            elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #b
+                            elif x > 20 and x < 200 and y > 120  and y < 147 and not escolha[0][1]: #1b
                                 sair = False
                                 fimdejogo = False
                         if pergunta == 2:
@@ -244,12 +249,14 @@ def jogo():
                             pass
                         if pergunta == 9:
                             pass
+            #telafinal
             if telafinal:
                 fundo.fill(corfundo)
                 texto("Parabéns", vermelho, 50, 65, 30)
                 texto("Você é um excelênte", preto, 30, 40, 80)
                 texto("programador", preto, 30, 40, 100)
                 pygame.display.update()
+            #
             if finale:
                 if telamorte:
                     fundo.fill(corfundo)
@@ -262,7 +269,7 @@ def jogo():
                     pygame.display.update()
                 if not telamorte and finale:
                     perguntas(pergunta)
-        # movimentação cobra
+        #sair do jogo pelo "X" e movimentação cobra
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sair = False
@@ -289,7 +296,7 @@ def jogo():
             if pos_x == maca_x and pos_y == maca_y:
                 maca_x = randrange(0, largura - tamanho, 10)
                 maca_y = randrange(0, altura - tamanho - 40, 10)
-                CobraComp += 1
+                CobraComprimento += 1
                 pontos += 1
                 if pontos == 27:
                     fimdejogo = True
@@ -301,7 +308,7 @@ def jogo():
                     pergunta += 1
                     telamorte = False
                     fimdejogo = True
-
+            #regras de jogo e aumento da cobra
             if despausar:
                 # Regras de parede
                 if pos_x + tamanho > largura:
@@ -317,7 +324,7 @@ def jogo():
                 CobraInicio.append(pos_x)
                 CobraInicio.append(pos_y)
                 CobraXY.append(CobraInicio)
-                if len(CobraXY) > CobraComp:
+                if len(CobraXY) > CobraComprimento:
                     del CobraXY[0]
                 # fim de jogo, colisão da cobra com sí própria
                 if any(Bloco == CobraInicio for Bloco in CobraXY[:-1]):
