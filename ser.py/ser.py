@@ -2,7 +2,7 @@
 from typing import final
 import pygame
 from random import randrange
-
+#declaração de cores
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 vermelho = (255, 0, 0)
@@ -14,11 +14,12 @@ try:
     pygame.init()
 except:
     print("O modulo pygame não foi inicializado com sucesso")
-
+#tamanho da tela, da cobra e da area de placar
 largura = 340
 altura = 280
 tamanho = 10
 placar = 40
+
 # fps, tamanho da tela,  nome do jogo, e fonte de texto
 relogio = pygame.time.Clock()
 fundo = pygame.display.set_mode((largura, altura))
@@ -27,6 +28,7 @@ font = pygame.font.SysFont(None, 15)
 corcobra = amarelo
 corfundo = azul
 telafinal = False
+
 #area de atribuição das respostas certas e erradas (em ordem 1,2,3,4,5,6,7,8,9)
 escolha = [[True, False], [False, False, True, False], [False, False, False, True], [True, False, False, False],
            [False, False, True, False], [False, False, True], [False, True, False], [False, True, False],
@@ -38,7 +40,7 @@ def texto(msg, cor, tam, x, y):
     texto1 = font.render(msg, True, cor)
     fundo.blit(texto1, [x, y])
 
-
+#perguntas na tela 
 def perguntas(n):
     if n == 1:
         fundo.fill(corfundo)
